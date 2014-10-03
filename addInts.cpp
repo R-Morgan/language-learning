@@ -1,6 +1,12 @@
 #include <iostream>                  //IO macro
 using namespace std;                 // Invoke std namespace
 
+int summed (int x, int y)
+{
+  return x + y;
+}
+
+
 int main()                           //main declaration
 {
   int num1;                          // Declares integer variables
@@ -11,9 +17,7 @@ int main()                           //main declaration
   cin>> num1 >> num2;                
   cin.ignore();           
 
-  sum = num1 + num2;                 // Calculates sum of two ints
-
-  cout<<"The sum of the numbers is: " <<sum <<"\n";  // Output results
+  cout<<"The sum of the numbers is: " <<summed (num1, num2) <<"\n";
   cin.get();
 }
 
