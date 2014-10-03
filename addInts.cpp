@@ -1,5 +1,5 @@
-#include <iostream> 
-using namespace std;
+#include <iostream>                                //IO macro
+using namespace std;                               // Invoke std namespace
 
 int main()
 {
