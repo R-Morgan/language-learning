@@ -1,0 +1,6 @@
+I'm Rianna
+I like Haskell
+It is fun
+Yay Haskell!
+
+Lucky numbers: 23 17 3 5 Also 7
