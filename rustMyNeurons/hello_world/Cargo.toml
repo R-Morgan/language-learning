@@ -1,0 +1,10 @@
+[package]
+
+name = "hello_world"
+version = "0.0.1"
+authors = ["Rianna Morgan <rmorgan@trystero.is>"]
+
+[[bin]]
+name = "hello_world"
+
+
