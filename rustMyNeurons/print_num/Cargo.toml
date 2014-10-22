@@ -1,0 +1,10 @@
+[package]
+
+name = "print_num"
+version = "0.0.1"
+authors = ["Rianna Morgan <rmorgan@trystero.is>"]
+
+[[bin]]
+name = "print_num"
+
+
