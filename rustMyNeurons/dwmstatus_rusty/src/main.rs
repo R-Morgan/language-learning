@@ -1,11 +1,14 @@
 extern crate dwmstatus_rusty;
+extern crate time;
 
 use std::io::BufferedReader;
 use std::io::File;
+use time::{now,strftime};
 
 fn main() {
     loop { 
        get_loadavg();
+       get_time();
     }
 }
 
@@ -43,4 +46,20 @@ pub fn get_loadavg(){
         println!("L: {}, {}, {}", split[0], split[1], split[2]);
         return;
     }
+}
+
+pub fn get_time() { 
+    let cur_time = time::now();
+    let day: &str = match cur_time.tm_wday { 
+        0 => "Sun",
+        1 => "Mon",
+        2 => "Tues",
+        3 => "Wed",
+        4 => "Thurs",
+        5 => "Fri",
+        6 => "Sat",
+        _ => "Nothing",
+    };
+
+    println!("{:s} {:02d} {:02d}:{:02d}:{:02d}", day, cur_time.tm_mday, cur_time.tm_hour, cur_time.tm_min, cur_time.tm_sec);
 }
