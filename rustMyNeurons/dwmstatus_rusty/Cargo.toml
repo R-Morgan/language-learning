@@ -1,0 +1,5 @@
+[package]
+
+name = "dwmstatus_rusty"
+version = "0.0.1"
+authors = ["R-Morgan <rmorgan@trystero.is>"]
