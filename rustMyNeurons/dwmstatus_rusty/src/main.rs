@@ -1,5 +1,6 @@
 extern crate dwmstatus_rusty;
 extern crate time;
+extern crate rust-xlib;
 
 use std::io::BufferedReader;
 use std::io::File;
@@ -23,6 +24,10 @@ pub fn get_loadavg(){
     // File's path seems to be referenced by a pointer to our path variable.
     // Is it that File::open() takes a pointer to a string? Or that this is a
     // &str? May very well be one and the same in Rust.
+
+    let cur_time = time::now();
+    let day2: String = get_wday(cur_time);
+    let month2: String = get_month(cur_time);
 
     for line in file.lines() {
     // Starts for loop
@@ -48,38 +53,6 @@ pub fn get_loadavg(){
     }
 }
 
-pub fn get_time() { 
-    let cur_time = time::now();
-
-    let day: &str = match cur_time.tm_wday { 
-        0 => "Sun",
-        1 => "Mon",
-        2 => "Tues",
-        3 => "Wed",
-        4 => "Thurs",
-        5 => "Fri",
-        6 => "Sat",
-        _ => "Nothing",
-    };
-
-    let month: &str = match cur_time.tm_mon{ 
-        0 => "Jan",
-        1 => "Feb",
-        2 => "March",
-        3 => "April",
-        4 => "May",
-        5 => "June",
-        6 => "July",
-        7 => "Aug",
-        8 => "Sept",
-        9 => "Oct",
-        10 => "Nov",
-        11 => "Dec",
-        _ => "Nothing",
-    };
-
-    let day2: String = get_wday(cur_time);
-    let month2: String = get_month(cur_time);
 
     println!("{:s} {:02d} {:s} {:02d}:{:02d}:{:02d}", day2.as_slice(), cur_time.tm_mday, month2.as_slice(), cur_time.tm_hour, cur_time.tm_min, cur_time.tm_sec);
 
