@@ -1,16 +1,18 @@
 extern crate dwmstatus_rusty;
 extern crate time;
-extern crate rust-xlib;
+extern crate xlib;
 
 use std::io::BufferedReader;
 use std::io::File;
 use time::{now,strftime,Tm};
+use xlib::{XOpenDisplay,XDefaultScreen,XDefaultRootWindow,XSync,XStoreName,XGetWindowProperty};
+use xlib::Atom;
 
 fn main() {
     loop { 
-       get_loadavg();
-       get_time();
+    store_string();
     }
+
 }
 
 pub fn get_loadavg(){
@@ -25,9 +27,6 @@ pub fn get_loadavg(){
     // Is it that File::open() takes a pointer to a string? Or that this is a
     // &str? May very well be one and the same in Rust.
 
-    let cur_time = time::now();
-    let day2: String = get_wday(cur_time);
-    let month2: String = get_month(cur_time);
 
     for line in file.lines() {
     // Starts for loop
@@ -53,9 +52,12 @@ pub fn get_loadavg(){
     }
 }
 
-
-    println!("{:s} {:02d} {:s} {:02d}:{:02d}:{:02d}", day2.as_slice(), cur_time.tm_mday, month2.as_slice(), cur_time.tm_hour, cur_time.tm_min, cur_time.tm_sec);
-
+fn extract_time() {
+         
+    let cur_time = time::now();
+    let day: String = get_wday(cur_time);
+    let month: String = get_month(cur_time);
+    println!("{:s} {:02d} {:s} {:02d}:{:02d}:{:02d}", day.as_slice(), cur_time.tm_mday, month.as_slice(), cur_time.tm_hour, cur_time.tm_min, cur_time.tm_sec);
 }
 
 fn get_wday(time_struct: Tm) -> String {
@@ -95,3 +97,23 @@ fn get_month(time_struct: Tm) -> String {
  
 }
 
+/*
+fn x_connect() { 
+   let dsp = unsafe { XOpenDisplay (&mut 0i8 ) };
+   let screen = unsafe { XDefaultScreen(dsp) };
+   let xroot =  unsafe { XDefaultRootWindow(dsp) };
+   //let wm_name = unsafe { XGetWindowProperty(dsp, xroot, WM_NAME) };
+   let name = unsafe { XGetWindowProperty(dsp, xroot, "WM_NAME", 0, 255, False, AnyPropertyType) };
+   println!("Hiya, display connection {0}!\n\tYour default screen is {1}\n\t\t. Your root window is {2}", dsp, screen, xroot);
+   println!("WM_NAME = {}", name);
+} 
+
+
+fn store_string() { 
+    let dsp = unsafe { XOpenDisplay (&mut 0i8 ) };
+    let screen = unsafe { XDefaultScreen(dsp) };
+    let xroot =  unsafe { XDefaultRootWindow(dsp) };
+    XStoreName(dsp, xroot, "Hi!");
+    XSync(dsp, 0);
+}
+*/
